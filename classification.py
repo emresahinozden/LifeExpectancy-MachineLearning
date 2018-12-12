@@ -25,76 +25,7 @@ for i in range(0,len(X[0])):
     X[:,i] = (X[:,i] - min(X[:,i])) / (max(X[:,i]) - min(X[:,i]))    
 del i
 # =============================================================================
-# =============================================================================
-# =============================================================================
 
-def class_fun(X,y,run=50):
-    from sklearn.linear_model import LogisticRegression
-    from sklearn.neighbors import KNeighborsClassifier
-    from sklearn.svm import SVC
-    from sklearn.naive_bayes import GaussianNB
-    from sklearn.tree import DecisionTreeClassifier
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.model_selection import cross_val_score
-    from sklearn.metrics import accuracy_score
-    from sklearn.model_selection import train_test_split
-    LRscore = []
-    KNNscore = []
-    SVMscore = []
-    SVMKscore = []
-    NBscore = []
-    Treescore = []
-    Forestscore=[]
-    
-    for i in range(0,run):
-        X_train, X_test, y_train, y_test =  train_test_split(X,y,test_size=0.25,shuffle=True)
-        
-        LRmodel = LogisticRegression()
-        LRmodel.fit(X_train,y_train)
-        y_pred = LRmodel.predict(X_test)
-        LRscore.append(accuracy_score(y_test, y_pred))
-    
-        KNNmodel = KNeighborsClassifier(n_neighbors=5)
-        KNNmodel.fit(X_train,y_train)
-        y_pred = KNNmodel.predict(X_test)
-        KNNscore.append(accuracy_score(y_test, y_pred))
-        
-        SVMmodel = SVC(kernel="linear")
-        SVMmodel.fit(X_train,y_train)
-        SVMmodel.predict(X_test)
-        SVMscore.append(accuracy_score(y_test, y_pred))
-
-        SVMkernel = SVC(kernel="rbf")
-        SVMkernel.fit(X_train,y_train)
-        y_pred = SVMkernel.predict(X_test)
-        SVMKscore.append(accuracy_score(y_test, y_pred))
- 
-        NBmodel = GaussianNB()
-        NBmodel.fit(X_train,y_train)
-        y_pred = NBmodel.predict(X_test)
-        NBscore.append(accuracy_score(y_test, y_pred))
-     
-        Treemodel = DecisionTreeClassifier(criterion = "entropy")
-        Treemodel.fit(X_train,y_train)
-        y_pred = Treemodel.predict(X_test)
-        Treescore.append(accuracy_score(y_test, y_pred))
-      
-        Forestmodel = RandomForestClassifier(n_estimators=10, criterion = "entropy")
-        Forestmodel.fit(X_train,y_train)
-        y_pred = Forestmodel.predict(X_test)
-        Forestscore.append(accuracy_score(y_test, y_pred))
-    
-    print(np.mean(LRscore))
-    print(np.mean(KNNscore))
-    print(np.mean(SVMscore))
-    print(np.mean(SVMKscore))
-    print(np.mean(NBscore))
-    print(np.mean(Treescore))
-    print(np.mean(Forestscore))
-
-# =============================================================================
-class_fun(X,y)   
-# =============================================================================
 from sklearn.feature_selection import RFECV 
 
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.25)
@@ -103,10 +34,10 @@ model = SVC(kernel="linear")
 selector = RFECV(estimator=model,step=1,cv=20)
 selector = selector.fit(X_train, y_train)
 print(len(selector.ranking_))
+
+# No features dropped
 # =============================================================================
-#without regions
-class_fun(X[:,10:],y)
-# =============================================================================
+
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.25)
 
 SVMmodel = SVC(kernel="linear")
