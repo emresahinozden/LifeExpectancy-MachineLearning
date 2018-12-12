@@ -1,8 +1,4 @@
-# =============================================================================
 import pandas as pd
-import os
-os.chdir("C:\\Users\\MONSTER\\Google Drive\\ders\\Data Mining\\project")
-# =============================================================================
 data = pd.read_csv("data.csv") 
 
 columns = list(data.columns)
