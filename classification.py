@@ -2,12 +2,11 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score
 from sklearn.svm import SVC
-os.chdir("C:\\Users\\MONSTER\\Google Drive\\ders\\Data Mining\\project")
+
 # =============================================================================
 data = pd.read_csv("data2.csv") 
 data.drop("GDP per Capita", axis=1, inplace=True)  
@@ -152,42 +151,3 @@ plt.plot(Clist,test_errors)
 plt.title("C values - Errors")
 plt.legend(["Training", "Test"], loc='upper left')
 plt.show()
-# =============================================================================
-#data = pd.read_csv("GDP_column.csv", header=None) 
-#X_plus = np.append(X, data, axis=1)
-#class_fun(X,y)   
-#class_fun(X_plus,y)   
-#
-#X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.25)
-#
-#SVMmodel = SVC(kernel="linear")
-#SVMmodel.fit(X_train,y_train)
-#
-#parameters = [ {"C":list(np.logspace(-1,2,30)), "kernel":["linear"]},
-#               {"C":list(np.logspace(-1,1,20)), "kernel":["rbf"], "gamma":list(np.logspace(-3,1,20))} ]
-#
-#search = GridSearchCV(estimator = SVMmodel, 
-#                      param_grid= parameters, 
-#                      scoring = "accuracy",
-#                      cv = 10)
-#search = search.fit(X_train,y_train)
-#print(search.best_score_)
-#print(search.best_params_)
-#y_pred = search.predict(X_test)
-#print()
-#print(accuracy_score(y_test, y_pred))
-
-# =============================================================================
-
-#from sklearn.decomposition import PCA
-#pca = PCA(n_components=None)
-#X_train_pca = pca.fit_transform(X)
-#X_test_pca = pca.transform(X_test)
-#variances = pca.explained_variance_ratio_
-#
-#pca = PCA(n_components=2)
-#X_train_pca = PCA(n_components=2).fit_transform(X)
-#X_test_pca = pca.transform(X_test)
-#variances = pca.explained_variance_ratio_
-
-# import xgboost 
